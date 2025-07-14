@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+# SQLite database (optional, only ignore if not required)
+db.sqlite3
+
+# Django migrations (optional)
+*/migrations/__pycache__/
+*/migrations/*.pyc
