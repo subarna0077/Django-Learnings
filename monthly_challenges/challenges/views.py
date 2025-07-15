@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.urls import reverse
-
+from django.template.loader import render_to_string
 
 challenges_dict = {
     "january": "Eat no meat for entire month",
@@ -15,21 +15,16 @@ challenges_dict = {
     "september": "Limit social media to 30 minutes a day",
     "october": "Do 20 push-ups every day",
     "november": "Learn a new programming concept weekly",
-    "december": "Reflect on your achievements this year",
+    "december": None,
 }
 
 # Create your views here.
 
 def index(request):
     months = list(challenges_dict.keys())
-    list_items = ""
-
-    for month in months:
-        month_path = reverse('month-challenge', args=[month]) 
-        list_items += f'<li><a href="{month_path}">{month.capitalize()}</a></li>'
-    response_data = f"<ul>{list_items}</ul>"
-    return HttpResponse(response_data)
-
+    return render(request, "challenges/index.html" , {
+        "months": months
+    })
 
 def monthly_challenges_by_number(request, month):
     months = list(challenges_dict.keys())
@@ -44,9 +39,14 @@ def monthly_challenges_by_number(request, month):
 
 
 def monthly_challenges(request, month):
-    challenge_text = challenges_dict.get(month)
-    if challenge_text:
-        response_data = f"<h1>{challenge_text}</h1>"
-        return HttpResponse(response_data)
-    else:
-        return HttpResponse("This month is not supported.", status=404)
+   challenge_text = challenges_dict.get(month)
+
+   if challenge_text is None:
+        response_data = render_to_string("404.html")
+        return HttpResponse(response_data, status=404)
+
+   try:
+        response_data = render(request,"challenges/challenge.html", {'text': challenge_text, "month": month})
+        return response_data
+   except:
+       raise Http404()
