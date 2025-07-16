@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+
+{% block title %} All posts section {% endblock title %}
+
+{% block content %}
+
+    <div class="wrapper"> 
+        <h1> My latest thougth </h1>
+
+        <div class='blogs-container'> 
+            {% for blog in blogs%}
+            <div class='blog'  onclick="window.location.href='{% url 'single-post' blog.slug %}'">
+
+                <img src="{{blog.image}}" /> 
+                <h2> {{blog.title}} </h2>
+                 <p> {{blog.description}} </p>
+                
+             </div>
+
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My Site{% endblock %}</title>
+
+    <!-- Google Font Example -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <!-- Link to Static CSS (if you have one) -->
+    <link rel="stylesheet" href="{% static 'blog/blog.css' %}">
+</head>
+<body>
+    <header class='header'>
+        <h1>Subarna's Blog</h1>
+        <nav>
+            <a href= " {% url 'all-posts' %} ">All posts</a> |
+            
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        {% block content %}
+        <!-- Page-specific content goes here -->
+        {% endblock %}
+    </main>
+
+    <hr>
+
+    <footer>
+        <p>&copy; 2025 My Site. All rights reserved.</p>
+    </footer>
+</body>
+</html>
