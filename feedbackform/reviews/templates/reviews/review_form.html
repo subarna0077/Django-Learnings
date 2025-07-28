@@ -1,0 +1,15 @@
+{% extends "reviews/base.html" %}
+
+    {% block title %}Your reviews{% endblock title %}
+
+    {% block content %}
+      <form action="/" method="post" novalidate>
+      {% csrf_token %} {% for field in form %}
+      <div>{{field.label_tag}} {{field}} {% if field.errors %} <ul style="color:red;"> {% for error in field.errors  %} <li>{{error}} </li>{% endfor %} </ul>{% endif %}</div>
+
+      {% endfor %}
+
+      <button>Submit form</button>
+    </form>
+    {% endblock content %}
+ 
