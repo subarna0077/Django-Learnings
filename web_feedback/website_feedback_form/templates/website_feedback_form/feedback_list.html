@@ -1,0 +1,20 @@
+{% extends "website_feedback_form/base.html" %}
+
+{% block title %}Feedback list{% endblock title %}
+
+{% block content %}
+<h1> List of feedbacks </h1>
+
+{% if feedbacks %}
+{% for feedback in feedbacks %}
+<div> 
+    {{feedback.email_address}}
+    
+
+</div>
+{% endfor %}
+{% endif %}
+
+
+
+{% endblock content %}

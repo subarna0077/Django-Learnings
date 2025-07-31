@@ -1,0 +1,41 @@
+{% extends "website_feedback_form/base.html" %}
+
+{% block title %}Website feedback form{% endblock title %}
+
+{% block content %}
+<form method="post" novalidate>
+    {% csrf_token %}
+
+<div class="form-group">
+    {{ form.name.label_tag }}
+    {{ form.name }}
+  </div>
+
+<div class="form-group">
+    {{ form.email_address.label_tag }}
+    {{ form.email_address }}
+</div>
+
+ <div class="form-group">
+    {{ form.first_time_visit.label_tag }}
+    {{ form.first_time_visit }}
+  </div>
+
+   <div class="form-group">
+    {{ form.reason_to_visit.label_tag }}
+    {{ form.reason_to_visit }}
+  </div>
+
+   <div class="form-group">
+    {{ form.user_friendlyness.label_tag }}
+    {{ form.user_friendlyness }}
+  </div>
+
+   <div class="form-group">
+    {{ form.found_what_needed.label_tag }}
+    {{ form.found_what_needed }}
+  </div>
+
+    <button>Submit</button>
+</form>
+{% endblock content %}
